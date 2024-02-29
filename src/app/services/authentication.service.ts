@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from './../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,17 +10,16 @@ import { Router } from '@angular/router';
 export class AuthenticationService {
   private readonly tokenSubject = new BehaviorSubject<string | null>(null);
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http:HttpClient, private router:Router) {}
 
-  login(username: string, password: string){
-    return this.http.post<{ token: string}>('http://localhost:3000/login', {
+  login(username:string, password:string){
+    return this.http.post<{ token:string}>(`${environment.apiUrl}/login`, {
       username,
       password,
     });
   }
   setToken(token: string) {
     localStorage.setItem('token', token);
-    this.tokenSubject.next(token);
   }
 
   getToken(){
@@ -30,9 +30,19 @@ export class AuthenticationService {
     return !!this.getToken();
   }
 
+  register(username: string, password: string) {
+    return this.http.post<>(
+      REGISTER_URL,
+      {
+      username: username,
+      password: password,
+      returnSecureToken: true
+    }
+    )
+  }
+
   logout(){
     localStorage.removeItem('token');
-    this.tokenSubject.next(null);
     this.router.navigate(['/login']);
   }
 }

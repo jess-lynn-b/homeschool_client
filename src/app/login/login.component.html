@@ -1,13 +1,36 @@
-<div class ="container">
+<div class="image-container">
+<div class ="row">
 <form [formGroup]="loginForm" (ngSubmit)="login()">
   <div class="formGroup">
     <label for="username">Username</label>
-    <input type="text" formControlName="username">
+    <input type="text" formControlName="username"
+    maxlength="15">
+
   </div>
   <div class ="formGroup">
     <label for="password">Password</label>
-    <input type="password" formControlName="password">
+    <input type="password" formControlName="password"
+    minlength="8"
+    required>
   </div>
-  <button type = "submit" [disabled]="!loginForm.valid">Login</button>
-</form>
+  <div class="form-group d-flex justify-content-between">
+    <button
+    class="btn btn-primary mr-3"
+    type="submit"
+    [disabled]="!loginForm.valid"
+    >{{ isLoginMode ? "Login" : "Register" }}
+   </button>
+    <button
+    class="btn btn-sm btn-transparent text-primary "
+    type="button"
+    (click)="onSwitchAuthMode()"
+    >
+    Switch to {{ isLoginMode ? "Register" : " Login "}}
+  </button>
+  </div>
+  </form>
+<p class="alert alert-danger mt-3" *ngIf="errorMsg">
+{{ errorMsg }}
+</p>
+</div>
 </div>
