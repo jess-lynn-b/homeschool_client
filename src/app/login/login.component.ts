@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
-import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-login',
@@ -12,14 +12,20 @@ import { Observable } from 'rxjs';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  isLoggingIn:boolean = true;
   loginForm:FormGroup = new FormGroup({
   username: new FormControl('', Validators.required),
   password: new FormControl('', Validators.required)
-});
-  isLoginMode = true;
-  errorMsg: string | null = null;
+  });
+  signUpForm:FormGroup = new FormGroup({
+    username: new FormControl('', Validators.required),
+    first_name: new FormControl('', Validators.required),
+    last_name: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+    password_confirmation: new FormControl('', Validators.required)
+  });
 
-constructor(private authService: AuthenticationService, private router: Router) {}
+  constructor(private authService: AuthenticationService, private router: Router) {}
 
   login(){
     console.log('login is called');
@@ -27,27 +33,46 @@ constructor(private authService: AuthenticationService, private router: Router) 
       const username = this.loginForm.value.username;
       const password = this.loginForm.value.password;
 
-      if (this.isLoginMode) {
-        const authObsv = this.authService.login(username, password);
-      } else {
-        const authObsv = this.authService.register (username, password)
-      }
-
-      authObsv.subscribe({
-        next: (resData) => {
-          
+      this.authService.login(username, password).subscribe({
+        next: (response:any) => {
+          console.log(response);
+          this.router.navigate(['/home']);
+        },
+        error: (error:any) => {
+          console.log('Error loggin in', error);
         }
-      })
+      });
+    }
+  }
 
-      // this.authService.login(username, password).subscribe({
-      //   next: (response:any) => {
-      //     console.log(response);
-      //     this.router.navigate(['/students']);
-      //   },
-      //   error: (error: any) => {
-      //     console.log('Login error', error);
-      //   }
-      // });
+  signup(){
+    if (this.signUpForm.valid) {
+      const username = this.signUpForm.value.username;
+      const first_name = this.signUpForm.value.first_name;
+      const last_name = this.signUpForm.value.last_name;
+      const password = this.signUpForm.value.password;
+      const password_confirmation = this.signUpForm.value.password_confirmation;
+
+      this.authService.signUp(username, first_name, last_name, password, password_confirmation).subscribe({
+        next: (response:any) => {
+          console.log(response);
+          this.isLoggingIn = true;
+        },
+        error: (error:any) => {
+          console.log('Error signing up', error);
+        }
+      });
+    }
+  }
+
+  switchLoginOrSignup(option:string) {
+    switch (option) {
+      case 'login' :
+        this.isLoggingIn = true;
+        break;
+      case 'sign-up':
+        this.isLoggingIn = false;
+        break;
     }
   }
 }

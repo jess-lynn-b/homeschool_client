@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
-  constructor(public authService: AuthenticationService){}
+  constructor(public authService: AuthenticationService, private router:Router){}
 
-  logout(){
-    this.authService.logout();
+  onRoute(route:string) {
+    return this.router.url.includes(route);
   }
 }

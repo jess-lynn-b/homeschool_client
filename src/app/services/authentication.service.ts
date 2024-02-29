@@ -9,15 +9,26 @@ import { environment } from './../environments/environment';
 })
 export class AuthenticationService {
   private readonly tokenSubject = new BehaviorSubject<string | null>(null);
+  private tokenExpTimer: any;
 
   constructor(private http:HttpClient, private router:Router) {}
 
   login(username:string, password:string){
-    return this.http.post<{ token:string}>(`${environment.apiUrl}/login`, {
+    return this.http.post(`${environment.apiUrl}/login`, {
       username,
       password,
     });
   }
+  signUp(username:string, first_name:string, last_name:string, password:string, password_confirmation:string){
+    return this.http.post(`${environment.apiUrl}/login/signup`, {
+      username,
+      first_name,
+      last_name,
+      password,
+      password_confirmation
+    });
+  }
+
   setToken(token: string) {
     localStorage.setItem('token', token);
   }
@@ -28,17 +39,6 @@ export class AuthenticationService {
 
   isLoggedIn(){
     return !!this.getToken();
-  }
-
-  register(username: string, password: string) {
-    return this.http.post<>(
-      REGISTER_URL,
-      {
-      username: username,
-      password: password,
-      returnSecureToken: true
-    }
-    )
   }
 
   logout(){
