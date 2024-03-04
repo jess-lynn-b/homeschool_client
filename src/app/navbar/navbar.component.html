@@ -1,30 +1,22 @@
-<div class="navbar" [class.active]="!onRoute('login')">
-  <div class="branding"> Homeschooling to dreams...</div>
-  <div class="burger-container">
-    <button class="burger">
-      <span class="material-symbols-outlined">
-        Home</span>
-    </button>
+<nav class="navbar">
+  <div class="brand-name"> Homeschooling to dreams...</div>
+  <div class="sidebar">
+    <nav>
+      @if (authService.isLoggedIn()){
+        <a
+        routerLink="/"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true}">Home</a>
+        <a (click)="this.authService.logout()">Logout</a>
+      }@else {
+        <a routerLink="/login">Login</a>
+        <br>
+        <a routerLink="/signup">Signup</a>
+      }
+    </nav>
   </div>
-  <div class="burger-container">
-    <button class="burger">
-      <span class="material-symbols-outlined">
-        Missouri HS Requriments
-      </span>
-    </button>
+  <div class="sidebar" [class.active]="isSidebarVisible">
+    <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+    <br>
+      <a routerLink="/mo_hs_req" routerLinkActive="active">Missouri HS Requirements</a>
   </div>
-  <div class="burger-container">
-    <button class="burger">
-      <span class="material-symbols-outlined">
-        Hours Tracked
-      </span>
-    </button>
-  </div>
-  <div class="burger-container">
-    <button class="burger">
-      <span class="material-symbols-outlined">
-        Contact Us
-      </span>
-    </button>
-  </div>
-</div>

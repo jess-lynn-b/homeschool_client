@@ -1,36 +1,38 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { UserService } from './user.service';
 import { Router } from '@angular/router';
 import { environment } from './../environments/environment';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
   private readonly tokenSubject = new BehaviorSubject<string | null>(null);
-  private tokenExpTimer: any;
+  // private tokenExpTimer: any;
 
-  constructor(private http:HttpClient, private router:Router) {}
+  constructor(private http:HttpClient, private router:Router, private userService:UserService) {}
+
+  // sent POST request to server to log in the user
 
   login(username:string, password:string){
-    return this.http.post(`${environment.apiUrl}/login`, {
+    return this.http.post<{token: string}>(`${environment.apiUrl}/login`, {
       username,
       password,
-    });
-  }
-  signUp(username:string, first_name:string, last_name:string, password:string, password_confirmation:string){
-    return this.http.post(`${environment.apiUrl}/login/signup`, {
-      username,
-      first_name,
-      last_name,
-      password,
-      password_confirmation
     });
   }
 
-  setToken(token: string) {
+  //send a POST request to the server to signup the user
+
+  signUp(formData:any){
+    return this.http.post(`${environment.apiUrl}/users`, formData);
+    }
+
+
+  setToken(token:string) {
     localStorage.setItem('token', token);
+    this.tokenSubject.next(token);
   }
 
   getToken(){
@@ -43,6 +45,7 @@ export class AuthenticationService {
 
   logout(){
     localStorage.removeItem('token');
+    this.tokenSubject.next(null);
     this.router.navigate(['/login']);
   }
 }
