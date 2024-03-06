@@ -24,6 +24,7 @@ export class SignupComponent {
   constructor(private authService:AuthenticationService, private router:Router){}
 
   onSignUp(){
+    console.log('calling works')
     const formValue = this.signupForm.value;
 
     this.authService.signUp(formValue).subscribe({

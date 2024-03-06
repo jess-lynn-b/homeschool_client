@@ -23,7 +23,7 @@ export class LoginComponent {
 
   login(){
     if(this.loginForm.valid) {
-      this.authService.login(this.loginForm.value.username, this.loginForm.value.passsword).subscribe({
+      this.authService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe({
         next: (res:any) => {
           console.log('Logged in with token:', res.token);
           this.authService.setToken(res.token);
