@@ -26,18 +26,4 @@ export class NavbarComponent implements OnInit {
   isLoggedIn(){
     return this.authService.isLoggedIn();
   }
-  logout(){
-    if (this.isSidebarVisible){
-      this.toggleSidebar();
-    }
-    this.authService.logout();
-    this.userService.setCurrentUser(null);
-  }
-
-  toggleSidebar(){
-    this.isSidebarVisible = !this.isSidebarVisible;
-  // }
-  // onRoute(route:string) {
-  //   return this.router.url.includes(route);
- }
 }

@@ -18,6 +18,14 @@ export const routes: Routes = [
   { path: 'mo_hs_req',
     loadComponent: () => import('./mo-hs-req/mo-hs-req.component').then((c) => c.MoHsReqComponent),
   },
+  {
+    path: 'contact',
+    loadComponent: () => import('./contact/contact.component').then ((c) => c. ContactComponent),
+  },
+   {
+    path: 'hours',
+    loadComponent: () => import('./courses/hours/hours.component').then ((m) => m.HourFormComponent),
+   },
   // {
   //   path: 'student',
   //   loadComponent: () => import('./student').then((m) => m.StudentList),
