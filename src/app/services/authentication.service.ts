@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { UserService } from './user.service';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,16 +17,21 @@ export class AuthenticationService {
   // sent POST request to server to log in the user
 
   login(username:string, password:string){
-    return this.http.post<{token: string}>(`${environment.apiUrl}/login`, {
+    return this.http.post<{token: string}>(`${environment.apiUrl}/login`,
+    {
       username,
       password,
-    });
+    }).pipe(switchMap((res:any) => {
+      this.setToken(res.token);
+      return this.userService.getBootstrapData();
+    }));
   }
 
   //send a POST request to the server to signup the user
 
   signUp(formData:any){
-    return this.http.post(`${environment.apiUrl}/users`, formData);
+    return this.http.post(`${environment.apiUrl}/users/sign_up`, formData)
+
     }
 
 

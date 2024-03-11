@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
-import { User } from '../shared/user';
 import { UserService } from '../services/user.service';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { User } from '../shared/user';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, FormsModule, CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent implements OnInit {
-  isSidebarVisible:boolean = false;
+export class NavbarComponent{
   currentUser: User | null = null;
 
   constructor(public authService: AuthenticationService, private userService:UserService){}
@@ -23,7 +24,7 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  isLoggedIn(){
+  isLoggedIn() {
     return this.authService.isLoggedIn();
   }
 }
