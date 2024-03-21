@@ -10,10 +10,17 @@
 }
 h1{
   color:whitesmoke;
-  text-shadow: 1px 1px black;
+  text-shadow: 2px 2px black;
   text-decoration: underline;
+  font-size: 28px;
+  letter-spacing: 1px;
 }
-p{
-  color: whitesmoke;
-  text-shadow: 1px 1px black;
+.paragraph{
+  color:black;
+  text-shadow: 1.5px 1.5px whitesmoke;
+  font-weight: 450;
+  font-size: 18px;
+  background: rgba(245, 245, 245, 0.874);
+  padding: 3%;
+  letter-spacing: .8px;
 }

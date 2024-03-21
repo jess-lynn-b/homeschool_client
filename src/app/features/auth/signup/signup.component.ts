@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { Router } from '@angular/router';
 
@@ -8,33 +13,46 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.scss'
+  styleUrl: './signup.component.scss',
 })
 export class SignupComponent {
-  signupForm:FormGroup = new FormGroup({
-    username: new FormControl(''),
-    first_name: new FormControl(''),
-    last_name: new FormControl(''),
-    password: new FormControl(''),
-    password_confirmation: new FormControl('')
+  signupForm: FormGroup = new FormGroup({
+    email: new FormControl('', Validators.required),
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+    password_confirmation: new FormControl('', Validators.required),
   });
 
-  errors:string[] = [];
+  errors: string[] = [];
 
-  constructor(private authService:AuthenticationService, private router:Router){}
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router
+  ) {}
 
-  onSignUp(){
-    console.log('calling works')
-    const formValue = this.signupForm.value;
+  onSignUp() {
+    // console.log('calling works')
+    if (this.signupForm.valid) {
+      const email = this.signupForm.value.email;
+      const username = this.signupForm.value.username;
+      const password = this.signupForm.value.password;
+      const password_confirmation = this.signupForm.value.password_confirmation;
 
-    this.authService.signUp(formValue).subscribe({
-      next: (res:any) => {
-        this.router.navigate(['/login']);
-      },
-      error: (error:any) => {
-        console.log(error.error);
-        this.errors = error.error;
-      }
-    });
+      this.authService
+        .signUp(
+          email,
+          username,
+          password,
+          password_confirmation
+        )
+        .subscribe({
+          next: (res: any) => {
+            this.router.navigate(['/login']);
+          },
+          error: (error: any) => {
+            console.log('Error signing up', error);
+          },
+        });
+    }
   }
 }

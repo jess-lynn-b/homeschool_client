@@ -7,13 +7,16 @@
   background-size: cover;
   box-shadow: 10px 10px 2px gray;
   padding: 10%;
-  filter: blur(.5px);
+  filter: blur(.2px);
 }
 h2{
-  padding: 7%;
+  padding: 4%;
   color:whitesmoke;
   text-shadow: 1px 1px black;
-  font-size: 28px;
+  font-size: 36px;
+}
+.form-group{
+  font-size: 22px;
 }
 .row{
   padding: 5%;
@@ -23,7 +26,27 @@ h2{
 }
 .small{
   color: white;
-  font-size: 14px;
+  font-size: 18px;
   text-shadow: 1px 1px black;
   text-align: center;
+}
+.form-control {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+}
+
+.btn {
+  font-size: 16px;
+  padding: 10px 24px;
+  background-color: #4D4DDB;
+  transition-duration: 0.4s;
+  color: whitesmoke;
+  border: 2px solid black;
+}
+
+.btn:hover {
+  background-color:  #be05cfb8;;
+  color:whitesmoke;
 }
