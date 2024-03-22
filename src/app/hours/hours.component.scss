@@ -10,7 +10,7 @@
   width: 100%;
   height: 100%;
   max-width: 1000px;
-  max-height: 680px;
+  max-height: 1000px;
 }
 .sidebar{
   display: flex;
@@ -86,4 +86,35 @@
       text-decoration: line-through;
       opacity: 80%;
     }
+    details {
+      width: 80%;
+      margin: 0 auto ;
+      margin-bottom: .5rem;
+      box-shadow: 0 .1rem 1rem -.5rem rgba(0,0,0,.4);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 1rem;
+      display: block;
+      padding-left: 2.2rem;
+      position: relative;
+      cursor: pointer;
+    }
+  /* THE MAGIC 🧙‍♀️ */
+details[open] > summary:before {
+  transform: rotate(90deg);
+}
+
+
+details summary::-webkit-details-marker {
+  display:none;
+}
+
+details > ul {
+  padding-bottom: 1rem;
+  margin-bottom: 0;
+}
+
 }
