@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TaskService } from '../services/task.service';
+
 import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { ActivatedRoute, Params } from '@angular/router';
   styleUrl: './hours.component.scss'
 })
 export class HoursComponent implements OnInit{
-  constructor(private taskService: TaskService, private route: ActivatedRoute){}
+  constructor(private route: ActivatedRoute){}
 
   ngOnInit() {
     this.route.params.subscribe(

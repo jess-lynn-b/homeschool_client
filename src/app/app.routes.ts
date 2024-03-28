@@ -26,6 +26,10 @@ export const routes: Routes = [
     path: 'hours',
     loadComponent: () => import('./hours/hours.component').then ((c) => c.HoursComponent),
    },
+   {
+    path: 'awards',
+    loadComponent: () => import('./awards/awards.component').then ((c) => c.AwardsComponent),
+   }
   // {
   //   path: 'student',
   //   loadComponent: () => import('./student').then((m) => m.StudentList),
