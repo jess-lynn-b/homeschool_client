@@ -15,12 +15,29 @@
 .sidebar{
   display: flex;
   flex-direction: column;
-  width: 250px;
+  width: 350px;
   background: whitesmoke;
   padding: 42px;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
 }
+
+.list-menu{
+  display: flex;
+  flex-direction: column ;
+  flex-grow: 1;
+  background: whitesmoke;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.list-menu-item {
+  display: flex;
+  flex-direction: column ;
+  flex-grow: 1;
+  background: pink;
+}
+
+
 .task-list-container{
   display: flex;
   flex-direction: column ;
@@ -41,6 +58,7 @@
   flex-direction: column;
   margin-top: 15px;
   flex-grow: 1;
+}
   .list-menu-item{
     display: flex;
     align-items: center;
@@ -58,7 +76,6 @@
       color: darkblue;
     }
   }
-}
 .button{
   background: rgb(45, 194, 243);
   color:whitesmoke;

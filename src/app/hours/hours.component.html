@@ -5,14 +5,67 @@
         Hours Completed
       </h1>
       <div class="list-menu">
-        <a class="list-menu-item is-active">
-          <p>Core Hours</p>
+        <a class="list-menu-item">
+          <details>
+          <summary>Core Hours</summary>
+            <form action="#">
+              <label for="date">Date:</label>
+              <input type="date" id="date" name="date" required><br>
+
+              <label for="task">Class:</label>
+              <input type="text" id="class" name="class" required><br>
+
+              <label for="start-time">Time Spent:</label>
+              <input type="time" id="start-time" name="start-time" required><br>
+
+              <label for="notes">Additional Notes:</label>
+              <textarea id="notes" name="notes" rows="5" cols="30"></textarea><br>
+
+              <input type="submit" value="Submit">
+          </form>
+        </details>
         </a>
         <a class="list-menu-item">
-          <p>Non-Core Hours</p>
+          <details>
+            <summary>Non-Core Hours</summary>
+              <form action="#">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required><br>
+
+                <label for="task">Class:</label>
+                <input type="text" id="class" name="class" required><br>
+
+                <label for="start-time">Time Spent:</label>
+                <input type="time" id="start-time" name="start-time" required><br>
+
+                <label for="notes">Additional Notes:</label>
+                <textarea id="notes" name="notes" rows="5" cols="30"></textarea><br>
+
+                <input type="submit" value="Submit">
+            </form>
+          </details>
         </a>
         <a class="list-menu-item">
-          <p> Extracurriculars</p>
+          <a class="list-menu-item">
+            <details>
+              <summary>Extracurriculars</summary>
+                <form action="#">
+                  <label for="date">Date:</label>
+                  <input type="date" id="date" name="date" required><br>
+
+                  <label for="task">Class:</label>
+                  <input type="text" id="class" name="class" required><br>
+
+                  <label for="start-time">Time Spent:</label>
+                  <input type="time" id="start-time" name="start-time" required><br>
+
+                  <label for="notes">Additional Notes:</label>
+                  <textarea id="notes" name="notes" rows="5" cols="30"></textarea><br>
+
+                  <input type="submit" value="Submit">
+              </form>
+            </details>
+          </a>
         </a>
       </div>
     </div>

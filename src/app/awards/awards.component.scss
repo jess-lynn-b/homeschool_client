@@ -36,7 +36,7 @@ p {
   letter-spacing: 1px;
 }
 
-.container {
+label[for="myfile"] {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -45,23 +45,11 @@ p {
   background: rgba(245, 245, 245, 0.874);
 }
 
-input[type="file"] {
-  position: absolute;
-  z-index: -1;
-  top: 15px;
-  left: 20px;
-  font-size: 17px;
-  color: whitesmoke;
-  border: 2px solid black;
-  border-radius: 4px;
-  background-color: #4D4DDB;
-}
-
 .button-wrap {
   position: relative;
 }
 
-.button {
+label[for="myfile"] {
   padding: 0.75rem;
   border: 2px solid black;
   border-radius: 4px;
@@ -73,6 +61,6 @@ input[type="file"] {
   transition: background-color 0.3s;
 }
 
-.button:hover {
+.input[type="file"]:hover {
   background-color: #be05cfb8;
 }

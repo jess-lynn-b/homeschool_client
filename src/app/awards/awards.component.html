@@ -4,11 +4,19 @@
 <br>
   <div class="info">
     Click on the "Choose File" button to upload a image or file:
+
+<form id="upload"
+      action="/action_page.php"
+      enctype="multipart/form-data">
+  <input type="file" id="myFile" name="myfile"/>
+  <br/><br/>
+  <input type="submit" />
+</form>
 </div>
-<div class="container">
+<!-- <div class="upload">
   <div class="button-wrap">
     <label class="button" for="upload">Choose File</label>
-    <input id="upload" type="file">
+    <input id="uploadFile" type="file" accept=".json" required>
   </div>
-</div>
+</div> -->
 </div>
