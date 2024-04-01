@@ -12,12 +12,13 @@
               <label for="date">Date:</label>
               <input type="date" id="date" name="date" required><br>
 
-              <label for="task">Class:</label>
-              <input type="text" id="class" name="class" required><br>
-
-              <label for="start-time">Time Spent:</label>
-              <input type="time" id="start-time" name="start-time" required><br>
-
+              <label for="task">Task:</label>
+              <input type="text" id="task" name="task" required><br>
+              <label for="time">Time spent:
+              <br>
+              <input type="number" id="hours" name="hours" min="0" required>hours<br>
+              <input type="number" id="minutes" name="minutes" min="0" max="59" required>minutes<br>
+            </label>
               <label for="notes">Additional Notes:</label>
               <textarea id="notes" name="notes" rows="5" cols="30"></textarea><br>
 
@@ -32,11 +33,14 @@
                 <label for="date">Date:</label>
                 <input type="date" id="date" name="date" required><br>
 
-                <label for="task">Class:</label>
-                <input type="text" id="class" name="class" required><br>
+                <label for="task">Task:</label>
+                <input type="text" id="task" name="task" required><br>
 
-                <label for="start-time">Time Spent:</label>
-                <input type="time" id="start-time" name="start-time" required><br>
+                <label for="time">Time spent:
+                  <br>
+                  <input type="number" id="hours" name="hours" min="0" required>hours<br>
+                  <input type="number" id="minutes" name="minutes" min="0" max="59" required>minutes<br>
+                </label>
 
                 <label for="notes">Additional Notes:</label>
                 <textarea id="notes" name="notes" rows="5" cols="30"></textarea><br>
@@ -53,11 +57,14 @@
                   <label for="date">Date:</label>
                   <input type="date" id="date" name="date" required><br>
 
-                  <label for="task">Class:</label>
-                  <input type="text" id="class" name="class" required><br>
+                  <label for="task">Task</label>
+                  <input type="text" id="task" name="task" required><br>
 
-                  <label for="start-time">Time Spent:</label>
-                  <input type="time" id="start-time" name="start-time" required><br>
+                  <label for="time">Time spent:
+                    <br>
+                    <input type="number" id="hours" name="hours" min="0" required>hours<br>
+                    <input type="number" id="minutes" name="minutes" min="0" max="59" required>minutes<br>
+                  </label>
 
                   <label for="notes">Additional Notes:</label>
                   <textarea id="notes" name="notes" rows="5" cols="30"></textarea><br>
@@ -68,7 +75,16 @@
           </a>
         </a>
       </div>
+      <ul>
+        <li *ngFor="let hourTracking of hourTrackings">
+          <!-- Display hour tracking data here -->
+          <p>Date: {{ hourTracking.date }}</p>
+          <p>Task: {{ hourTracking.task }}</p>
+          <!-- Add other properties as needed -->
+        </li>
+      </ul>
     </div>
+
     <div class="task-list-container">
       <h1 class="title has text primary">
         Classes / Credits
