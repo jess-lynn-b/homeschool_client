@@ -2,7 +2,7 @@
   <div class="task-manager-container">
     <div class="sidebar">
       <h1 class="title has text primary">
-        Hours Completed
+        Track Hours Completed
       </h1>
       <div class="list-menu">
         <a class="list-menu-item">
@@ -75,11 +75,18 @@
           </a>
         </a>
       </div>
+    </div>
+    <div class="sidebar">
+      <h1 class="title has text primary">
+         Total Hours Completed
+      </h1>
       <ul>
         <li *ngFor="let hourTracking of hourTrackings">
           <!-- Display hour tracking data here -->
           <p>Date: {{ hourTracking.date }}</p>
           <p>Task: {{ hourTracking.task }}</p>
+          <p>Time Spent: {{ hourTracking.time }}</p>
+          <p>Additional Notes: {{ hourTracking.notes }}</p>
           <!-- Add other properties as needed -->
         </li>
       </ul>

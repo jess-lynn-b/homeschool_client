@@ -1,18 +1,18 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HourTrackingService } from '../services/hourtracking.service';
 import { CommonModule } from '@angular/common';
 
-interface HourTrackingFormData {
-  date: string;
-  task: string;
-  time: string;
-  hours: string;
-  minutes: string;
-  notes: string;
-}
-@Injectable({
-  providedIn: 'root'
-})
+// interface HourTrackingFormData {
+//   date: string;
+//   task: string;
+//   time: string;
+//   hours: string;
+//   minutes: string;
+//   notes: string;
+// }
+// @Injectable({
+//   providedIn: 'root'
+// })
 @Component({
   selector: 'app-hours',
   standalone: true,
@@ -24,7 +24,8 @@ export class HoursComponent implements OnInit{
   hourTrackings!: any[];
 
   constructor(private hourTrackingService: HourTrackingService){}
-  ngOnInit(){
+
+  ngOnInit(): void {
     this.getHourTrackings();
   }
 

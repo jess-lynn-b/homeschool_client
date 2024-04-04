@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
-// import { authGuard } from './auth.guard';
+import { LoginComponent } from './features/auth/login/login.component';
+import { ProfileComponent } from './features/auth/profile.component';
+import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
   {
@@ -29,6 +31,11 @@ export const routes: Routes = [
    {
     path: 'awards',
     loadComponent: () => import('./awards/awards.component').then ((c) => c.AwardsComponent),
+   },
+   {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [authGuard] //Protect the profile route with authGuard
    }
   // {
   //   path: 'student',

@@ -1,0 +1,13 @@
+<div class="image-container">
+  <div class="container">
+    <form id="profileForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" [(ngModel)]="profile.name" required><br><br>
+      <label for="bio">Bio:</label>
+      <textarea id="bio" [(ngModel)]="profile.bio"></textarea><br><br>
+      <label for="profilePhoto">Profile Photo:</label>
+        <input type="file" id="profilePhoto" name="profilePhoto"><br><br>
+        <button (click)="updateProfile()">Save Profile</button>
+    </form>
+  </div>
+</div>
