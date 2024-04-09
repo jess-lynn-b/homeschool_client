@@ -1,43 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { Profile } from '../../shared/models/profile';
 import { ProfileService } from '../../services/profile.service';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [],
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.scss'
+  styleUrls: ['./profile.component.scss']
 })
+
 export class ProfileComponent implements OnInit {
   profile: Profile = {} as Profile;
+  editing = false;
 
-  constructor(private profileService: ProfileService) {}
+  constructor(
+    private profileService: ProfileService) {}
 
-  ngOnInit(): void {
-    this.fetchProfile();
+  ngOnInit(){
+    this.getProfile();
   }
 
-  fetchProfile(): void {
-    this.profileService.getProfile().subscribe(
-      profile => {
-        this.profile = profile;
+  getProfile(): void {
+    this.profileService.getProfile().subscribe({
+      next: (data: Profile) => {
+        this.profile = data;
       },
-      error => {
+      error: (error: any) => {
         console.error('Error fetching profile:', error);
       }
-    );
+    });
+  }
+
+  toggleEdit() {
+    this.editing = !this.editing;
   }
 
   updateProfile(): void {
-    this.profileService.updateProfile(this.profile).subscribe(
-      updatedProfile => {
-        this.profile = updatedProfile;
-        console.log('Profile updated successfully:', updatedProfile);
-      },
-      error => {
-        console.error('Error updating profile:', error);
-      }
-    );
+    const formData = new FormData();
+    formData.append('profile[bio]', this.profile.bio);
   }
 }

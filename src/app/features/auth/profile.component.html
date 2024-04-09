@@ -2,12 +2,21 @@
   <div class="container">
     <form id="profileForm">
       <label for="name">Name:</label>
-      <input type="text" id="name" [(ngModel)]="profile.name" required><br><br>
+      <input [(ngModel)]="profile.name" name="name" type="text" id="name" ><br><br>
       <label for="bio">Bio:</label>
-      <textarea id="bio" [(ngModel)]="profile.bio"></textarea><br><br>
+      <textarea [(ngModel)]="profile.bio" [ngModelOptions]="{standalone: true}" id="bio"></textarea><br><br>
       <label for="profilePhoto">Profile Photo:</label>
         <input type="file" id="profilePhoto" name="profilePhoto"><br><br>
         <button (click)="updateProfile()">Save Profile</button>
     </form>
+    <button (click)="toggleEdit()">Edit Profile</button>
+   <!-- Edit Profile Modal-->
+  <div class="modal" *ngIf="editing">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Profile</h5>
+          <span class="close" (click)="toggleEdit()">&times;</span>
+        </div>
   </div>
 </div>

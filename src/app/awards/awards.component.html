@@ -1,22 +1,20 @@
 <div class="image-container">
-  <h2> Awards or Certificates...</h2>
-    <p> Any awards or certificates your child recieves upload a photo of them to keep for your records. This will allow you to stay organized and keep all homeschool documents in one location. </p>
+  <h2> Awards or Certificates Upload</h2>
+    <p> Upload a photo of any awards or certificates your child receives to keep for your records. This will allow you to stay organized and keep all homeschool documents in one location. </p>
 <br>
   <div class="info">
     Click on the "Choose File" button to upload a image or file:
 
-<form id="upload"
+    <input type="file" (change)="handleFileInput($event)" >
+    <button (click)="uploadFile()">Upload</button>
+<!-- <form id="upload"
       action="/action_page.php"
+      method="post"
       enctype="multipart/form-data">
-  <input type="file" id="myFile" name="myfile"/>
+  <label for="myFile">Choose File:</label>
+  <input type="file" id="myFile" name="myfile" accept="image/*"/>
   <br/><br/>
-  <input type="submit" />
-</form>
+  <input type="submit" value="Submit">
+</form> -->
 </div>
-<!-- <div class="upload">
-  <div class="button-wrap">
-    <label class="button" for="upload">Choose File</label>
-    <input id="uploadFile" type="file" accept=".json" required>
-  </div>
-</div> -->
 </div>

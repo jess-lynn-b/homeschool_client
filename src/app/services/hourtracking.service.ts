@@ -2,32 +2,42 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs';
+// import { environment } from '../../environments/environment.prod';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HourTrackingService{
 
-  private apiUrl = 'http://homeschool_new_api.com/hour_trackings';
+  //  private apiUrl = 'https://homeschool-new-api.onrender.com/hours';
+   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
-  getHourTrackings(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl).pipe(
+  createHour(formData: any): Observable<any>{
+    return this.http.post<any[]>(`${this.apiUrl}/hours`, FormData)
+    .pipe(
       catchError(this.handleError)
     );
   }
 
-  private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'An error occurred while fetching hour trackings.';
+  getHourTrackings(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/hours`)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+  private handleError(error: HttpErrorResponse): Observable<never> {
     if (error.error instanceof ErrorEvent) {
-      // Client-side error
-      errorMessage = 'Error: ${error.error.message}';
+      console.error('An error occurred:', error.error.message);
     } else {
-      // Server-side error
-      errorMessage = 'Error Code: ${error.status}\nMessage: ${error.message}';
+      // console.error(
+      //   `Backend returned code ${error.status},` +
+      //   `body was: ${error.error}`);
     }
-    console.error(errorMessage);
-    return throwError(errorMessage);
+      return throwError('Something bad happened; please try again later.');
   }
 }

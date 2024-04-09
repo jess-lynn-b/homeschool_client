@@ -7,22 +7,22 @@ import { AuthenticationService } from './services/authentication.service';
 import { of } from 'rxjs';
 import { authInterceptor } from './core/interceptors/auth.interceptor/auth.interceptor.component';
 
-export function intializeUserData(userService:UserService, authService:AuthenticationService) {
-  if (authService.isLoggedIn()){
-    return() =>userService.getBootstrapData().subscribe();
-  } else {
-    return () => of(null);
-  }
-}
+// export function intializeUserData(userService:UserService, authService:AuthenticationService) {
+//   if (authService.isLoggedIn()){
+//     return() =>userService.().subscribe();
+//   } else {
+//     return () => of(null);
+//   }
+// }
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes),
-    {
-      provide: APP_INITIALIZER,
-      useFactory: intializeUserData,
-      deps: [UserService, AuthenticationService],
-      multi: true
-    },
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: intializeUserData,
+    //   deps: [UserService, AuthenticationService],
+    //   multi: true
+    // },
     provideHttpClient(withInterceptors([authInterceptor]))
   ]
 };

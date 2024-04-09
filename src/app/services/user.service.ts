@@ -15,12 +15,4 @@ export class UserService {
   setCurrentUser(user: User | null) {
     this.currentUserBehaviorSubject.next(user);
   }
-
-  getBootstrapData(){
-    return this.http.get(`${environment.apiUrl}/web/bootstrap`).pipe(
-      tap((res:any) => {
-        this.setCurrentUser(res.current_user);
-      })
-    );
-  }
 }
