@@ -8,20 +8,20 @@
         <a class="list-menu-item">
           <details>
           <summary>Core Hours</summary>
-            <form [formGroup]="hoursForm"
-            (ngSubmit)="onSubmit(date.value, task.value, hours.value, minutes.value, notes.value)">
+            <form [formGroup]="hourForm"
+            (ngSubmit)="onSubmit()">
               <label for="date">Date:</label>
-              <input type="date" id="date" formControlName="date" #date required><br>
+              <input type="date" id="date" formControlName="date" #dateInput required><br>
 
               <label for="task">Task:</label>
-              <input type="text" id="task" formControlName="task"  #task  required><br>
+              <input type="text" id="task" formControlName="task"  #taskInput required><br>
               <label for="time">Time spent:
               <br>
-              <input type="number" id="hours" formControlName="hours" min="0" required #hours>hours<br>
-              <input type="number" id="minutes" formControlName="minutes" min="0" max="59" required #minutes>minutes<br>
+              <input type="number" id="hours" formControlName="hours" min="0" #hoursInput required>hours<br>
+              <input type="number" id="minutes" formControlName="minutes" min="0" max="59" #minutesInput required>minutes<br>
             </label>
               <label for="notes">Additional Notes:</label>
-              <textarea id="notes" formControlName="notes" rows="5" cols="30" #notes></textarea><br>
+              <textarea id="notes" formControlName="notes" rows="5" cols="30" #notesInput></textarea><br>
 
               <button type="submit">Submit</button>
           </form>
@@ -30,22 +30,22 @@
         <a class="list-menu-item">
           <details>
             <summary>Non-Core Hours</summary>
-            <form [formGroup]="hoursForm"
-            (ngSubmit)="onSubmit(date.value, task.value, hours.value, minutes.value, notes.value)">
+            <form [formGroup]="hourForm"
+            (ngSubmit)="onSubmit()">
                 <label for="date">Date:</label>
-                <input type="date" id="date" formControlName="date" required #date><br>
+                <input type="date" id="date" formControlName="date" #dateInput required><br>
 
                 <label for="task">Task:</label>
-                <input type="text" id="task" formControlName="task" required #task><br>
+                <input type="text" id="task" formControlName="task" #taskInputrequired><br>
 
                 <label for="time">Time spent:
                   <br>
-                  <input type="number" id="hours" formControlName="hours" min="0" required #hours>hours<br>
-                  <input type="number" id="minutes" formControlName="minutes" min="0" max="59" required #minutes>minutes<br>
+                  <input type="number" id="hours" formControlName="hours" min="0" #hoursInput required >hours<br>
+                  <input type="number" id="minutes" formControlName="minutes" min="0" max="59" #minutesInput required>minutes<br>
                 </label>
 
                 <label for="notes">Additional Notes:</label>
-                <textarea id="notes" formControlName="notes" rows="5" cols="30" #notes></textarea><br>
+                <textarea id="notes" formControlName="notes" rows="5" cols="30" #notesInput></textarea><br>
 
                 <button type="submit">Submit</button>
             </form>
@@ -55,22 +55,22 @@
           <a class="list-menu-item">
             <details>
               <summary>Extracurriculars</summary>
-              <form [formGroup]="hoursForm"
-              (ngSubmit)="onSubmit(date.value, task.value, hours.value, minutes.value, notes.value)">
+              <form [formGroup]="hourForm"
+              (ngSubmit)="onSubmit()">
                   <label for="date">Date:</label>
-                  <input type="date" id="date" formControlName="date" required #date><br>
+                  <input type="date" id="date" formControlName="date" #dateInput required><br>
 
                   <label for="task">Task</label>
-                  <input type="text" id="task" formControlName="task" required #task><br>
+                  <input type="text" id="task" formControlName="task" #taskInput required><br>
 
                   <label for="time">Time spent:
                     <br>
-                    <input type="number" id="hours" formControlName="hours" min="0" required #hours>hours<br>
-                    <input type="number" id="minutes" formControlName="minutes" min="0" max="59" required #minutes>minutes<br>
+                    <input type="number" id="hours" formControlName="hours" min="0" #hoursInput required>hours<br>
+                    <input type="number" id="minutes" formControlName="minutes" min="0" max="59" #minutesInput required>minutes<br>
                   </label>
 
                   <label for="notes">Additional Notes:</label>
-                  <textarea id="notes" formControlName="notes" rows="5" cols="30" #notes></textarea><br>
+                  <textarea id="notes" formControlName="notes" rows="5" cols="30" #notesInput></textarea><br>
 
                   <button type="submit">Submit</button>
               </form>
@@ -80,30 +80,31 @@
       </div>
     </div>
     <div class="sidebar">
-      <div *ngIf="errorMessage">
-        <p>{{ errorMessage }}</p>
-      </div>
-      <div *ngIf="hourTrackings && hourTrackings.length > 0">
       <h1 class="title has text primary">
          Total Hours Completed
       </h1>
+      <br>
       <ul>
-        <li *ngFor="let tracking of hourTrackings">
-          <!-- Display hour tracking data here -->
-          <p>Date: {{ tracking.date }}</p>
-          <p>Task: {{ tracking.task }}</p>
-          <p>Time Spent: {{ tracking.time }}</p>
-          <p>Additional Notes: {{ tracking.notes }}</p>
-          <!-- Add other properties as needed -->
+        <li *ngFor="let hour of hours">
+          <strong>Date:</strong> {{ hour.date }}<br>
+          <strong>Task:</strong> {{ hour.task }}<br>
+          <strong>Hours:</strong> {{ hour.hours }}<br>
+          <strong>Minutes:</strong> {{ hour.minutes }}<br>
+          <strong>Notes:</strong> {{ hour.notes }}<br>
+
+          <!-- Edit Button
+           <button (click)="editHour(hour)" class="button is-small is-primary" style="margin-right: 10px;">
+            Edit
+          </button> -->
+
+          <!-- Delete Button -->
+          <button (click)="deleteHour(hour.id)" class="button is-small is-danger">
+           Delete
+          </button>
+          <hr>
         </li>
       </ul>
-    </div>
-    </div>
-    <div *ngIf="!hourTrackings || hourTrackings.length === 0 && !errorMessage">
-      <p> No hour trackings available.</p>
-    </div>
-    </div>
-
+      </div>
     <div class="task-list-container">
       <h1 class="title has text primary">
         Classes / Credits

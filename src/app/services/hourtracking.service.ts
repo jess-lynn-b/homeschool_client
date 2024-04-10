@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs';
 // import { environment } from '../../environments/environment.prod';
 import { environment } from '../../environments/environment';
+import { Hour } from '../shared/models/hour';
 
 @Injectable({
   providedIn: 'root'
@@ -15,29 +16,40 @@ export class HourTrackingService{
 
   constructor(private http: HttpClient) {}
 
-  createHour(formData: any): Observable<any>{
-    return this.http.post<any[]>(`${this.apiUrl}/hours`, FormData)
+  createHour(date: string, task: string, hours: number, minutes: number, notes: string): Observable<any>{
+    const formData = {
+      hour_tracking: {
+        date,
+        task,
+        hours,
+        minutes,
+        notes
+      }
+    };
+    return this.http.post<any>(`${this.apiUrl}/hours`, formData)
     .pipe(
       catchError(this.handleError)
     );
   }
 
-  getHourTrackings(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/hours`)
-    .pipe(
-      catchError(this.handleError)
-    );
+  getAllHours(): Observable<Hour[]> {
+    return this.http.get<Hour[]>(`${this.apiUrl}/hours`)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
+  deleteHour(hourId: number): Observable<void> {
+    const url = `${this.apiUrl}/hours/${hourId}`;
+    return this.http.delete<void>(url)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
-  private handleError(error: HttpErrorResponse): Observable<never> {
-    if (error.error instanceof ErrorEvent) {
-      console.error('An error occurred:', error.error.message);
-    } else {
-      // console.error(
-      //   `Backend returned code ${error.status},` +
-      //   `body was: ${error.error}`);
-    }
+  private handleError(error: HttpErrorResponse): Observable<any> {
+      console.error('An error occurred:', error);
+
       return throwError('Something bad happened; please try again later.');
   }
 }
