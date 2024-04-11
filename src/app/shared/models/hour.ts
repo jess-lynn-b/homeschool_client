@@ -5,4 +5,5 @@ export interface Hour {
   hours: number;
   minutes: number;
   notes: string;
+  expanded: boolean;
 }

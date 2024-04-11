@@ -85,12 +85,14 @@
       </h1>
       <br>
       <ul>
-        <li *ngFor="let hour of hours">
+        <li *ngFor="let hour of hours" class="hour-item" [ngClass]="{ 'expanded' : hour.expanded }" (click)="toggleExpand(hour)">
           <strong>Date:</strong> {{ hour.date }}<br>
+          <div class="additional-info" *ngIf="hour.expanded">
           <strong>Task:</strong> {{ hour.task }}<br>
           <strong>Hours:</strong> {{ hour.hours }}<br>
           <strong>Minutes:</strong> {{ hour.minutes }}<br>
           <strong>Notes:</strong> {{ hour.notes }}<br>
+          <div class="additional-info" *ngIf="hour.expanded"></div>
 
           <!-- Edit Button
            <button (click)="editHour(hour)" class="button is-small is-primary" style="margin-right: 10px;">
@@ -101,15 +103,15 @@
           <button (click)="deleteHour(hour.id)" class="button is-small is-danger">
            Delete
           </button>
+        </div>
           <hr>
         </li>
       </ul>
       </div>
-    <div class="task-list-container">
+    <div class="sidebar">
       <h1 class="title has text primary">
         Classes / Credits
       </h1>
-
       <!-- Class / Credit Elements-->
       <div class="task">
         <details>
@@ -125,7 +127,6 @@
           </ul>
         </details>
       </div>
-
       <div class="task">
         <details>
           <summary> Math </summary>
@@ -257,6 +258,7 @@
           </ul>
 
         </details>
+      </div>
       </div>
        <!--
       <button class="button is-primary"

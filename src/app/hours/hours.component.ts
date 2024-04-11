@@ -39,7 +39,7 @@ export class HoursComponent implements OnInit{
     this.hourTrackingService.getAllHours()
       .subscribe(
         (data: Hour[]) => {
-          this.hours = data;
+          this.hours = data.map(hour => ({ ...hour, expanded: false }));
         },
         (error) => {
           console.error('Error fetching hours:', error);
@@ -62,6 +62,10 @@ export class HoursComponent implements OnInit{
           }
         );
     }
+  }
+
+  toggleExpand(hour: Hour): void {
+    hour.expanded = !hour.expanded;
   }
 
   onSubmit(): void{

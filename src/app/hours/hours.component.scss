@@ -4,7 +4,7 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 25px;
+  padding: 10px;
 
 }
 .task-manager-container{
@@ -15,13 +15,11 @@
   max-height: 1000px;
 }
 .sidebar{
-  display: flex;
-  flex-direction: column;
   width: 350px;
   background: whitesmoke;
   padding: 25px;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 .list-menu{
@@ -37,11 +35,27 @@
   display:contents;
   flex-direction: column ;
   flex-grow: 1;
-  background: pink;
+  background:  rgba(173, 216, 230, 0.654);
 }
 
+.hour-item {
+  cursor: pointer;
+  padding: 10px;
+  border-bottom: 1px solid rgba(173, 216, 230, 0.654);
+  transition: background-color 0.3s ease;
+}
 
-.task-list-container{
+.additional-info {
+  display: none;
+  margin-top: 10px;
+  padding: 5px;
+  background-color: rgba(173, 216, 230, 0.477);
+}
+.expanded .additional-info {
+  display: block;
+}
+
+.task{
   display: flex;
   flex-direction: column ;
   flex-grow: 1;
@@ -49,6 +63,9 @@
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   padding: 25px;
+}
+.task:hover {
+  background-color: pink;
 }
 .title{
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
