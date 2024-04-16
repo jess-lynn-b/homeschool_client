@@ -41,7 +41,7 @@
 .hour-item {
   cursor: pointer;
   padding: 10px;
-  border-bottom: 1px solid rgba(173, 216, 230, 0.654);
+  border-bottom: 1px solid black;
   transition: background-color 0.3s ease;
 }
 
@@ -89,7 +89,7 @@
     margin-bottom: 5px;
 
     &:hover{
-      background: lightblue;
+      background: pink;
     }
     &.is-active {
       background-color: rgba(255, 182, 193, 0.453);

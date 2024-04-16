@@ -1,33 +1,65 @@
 <div class="centered-content">
   <div class="task-manager-container">
     <div class="sidebar">
-      <h1 class="title has text primary">
-        Track Hours Completed
-      </h1>
+      <h1 class="title has text primary">Track Hours Completed</h1>
       <div class="list-menu">
         <a class="list-menu-item">
           <details>
-          <summary>Core Hours</summary>
-            <form [formGroup]="hourForm"
-            (ngSubmit)="onSubmit()">
+            <summary>Log Daily Hours</summary>
+            <form [formGroup]="hourForm" (ngSubmit)="onSubmit()">
               <label for="date">Date:</label>
-              <input type="date" id="date" formControlName="date" #dateInput required><br>
+              <input
+                type="date"
+                id="date"
+                formControlName="date"
+                #dateInput
+                required
+              /><br />
 
-              <label for="task">Task:</label>
-              <input type="text" id="task" formControlName="task"  #taskInput required><br>
-              <label for="time">Time spent:
-              <br>
-              <input type="number" id="hours" formControlName="hours" min="0" #hoursInput required>hours<br>
-              <input type="number" id="minutes" formControlName="minutes" min="0" max="59" #minutesInput required>minutes<br>
-            </label>
+              <label for="task">Classes:</label>
+              <input
+                type="text"
+                id="task"
+                formControlName="task"
+                #taskInput
+                required
+              /><br />
+              <label for="time"
+                >Time spent:
+                <br />
+                <input
+                  type="number"
+                  id="hours"
+                  formControlName="hours"
+                  min="0"
+                  #hoursInput
+                  required
+                />hours<br />
+                <input
+                  type="number"
+                  id="minutes"
+                  formControlName="minutes"
+                  min="0"
+                  max="59"
+                  #minutesInput
+                  required
+                />minutes<br />
+              </label>
               <label for="notes">Additional Notes:</label>
-              <textarea id="notes" formControlName="notes" rows="5" cols="30" #notesInput></textarea><br>
+              <textarea
+                id="notes"
+                formControlName="notes"
+                rows="5"
+                cols="30"
+                #notesInput
+              ></textarea
+              ><br />
 
               <button type="submit">Submit</button>
-          </form>
-        </details>
+            </form>
+          </details>
         </a>
-        <a class="list-menu-item">
+        <!-- <a class="list-menu-item">
           <details>
             <summary>Non-Core Hours</summary>
             <form [formGroup]="hourForm"
@@ -49,30 +81,64 @@
 
                 <button type="submit">Submit</button>
             </form>
-          </details>
-        </a>
+          </details> -->
+        <!-- </a> -->
         <a class="list-menu-item">
           <a class="list-menu-item">
             <details>
               <summary>Extracurriculars</summary>
-              <form [formGroup]="hourForm"
-              (ngSubmit)="onSubmit()">
-                  <label for="date">Date:</label>
-                  <input type="date" id="date" formControlName="date" #dateInput required><br>
+              <form [formGroup]="hourForm" (ngSubmit)="onSubmit()">
+                <label for="date">Date:</label>
+                <input
+                  type="date"
+                  id="date"
+                  formControlName="date"
+                  #dateInput
+                  required
+                /><br />
 
-                  <label for="task">Task</label>
-                  <input type="text" id="task" formControlName="task" #taskInput required><br>
+                <label for="task">Task: </label>
+                <input
+                  type="text"
+                  id="task"
+                  formControlName="task"
+                  #taskInput
+                  required
+                /><br />
 
-                  <label for="time">Time spent:
-                    <br>
-                    <input type="number" id="hours" formControlName="hours" min="0" #hoursInput required>hours<br>
-                    <input type="number" id="minutes" formControlName="minutes" min="0" max="59" #minutesInput required>minutes<br>
-                  </label>
+                <label for="time"
+                  >Time spent:
+                  <br />
+                  <input
+                    type="number"
+                    id="hours"
+                    formControlName="hours"
+                    min="0"
+                    #hoursInput
+                    required
+                  />hours<br />
+                  <input
+                    type="number"
+                    id="minutes"
+                    formControlName="minutes"
+                    min="0"
+                    max="59"
+                    #minutesInput
+                    required
+                  />minutes<br />
+                </label>
 
-                  <label for="notes">Additional Notes:</label>
-                  <textarea id="notes" formControlName="notes" rows="5" cols="30" #notesInput></textarea><br>
+                <label for="notes">Additional Notes:</label>
+                <textarea
+                  id="notes"
+                  formControlName="notes"
+                  rows="5"
+                  cols="30"
+                  #notesInput
+                ></textarea
+                ><br />
 
-                  <button type="submit">Submit</button>
+                <button type="submit">Submit</button>
               </form>
             </details>
           </a>
@@ -80,47 +146,51 @@
       </div>
     </div>
     <div class="sidebar">
-      <h1 class="title has text primary">
-         Total Hours Completed
-      </h1>
-      <br>
+      <h1 class="title has text primary">Total Hours Completed</h1>
+      <br />
       <ul>
-        <li *ngFor="let hour of hours" class="hour-item" [ngClass]="{ 'expanded' : hour.expanded }" (click)="toggleExpand(hour)">
-          <strong>Date:</strong> {{ hour.date }}<br>
+        <li
+          *ngFor="let hour of hours"
+          class="hour-item"
+          [ngClass]="{ expanded: hour.expanded }"
+          (click)="toggleExpand(hour)"
+        >
+          <strong>Date:</strong> {{ hour.date }}<br />
           <div class="additional-info" *ngIf="hour.expanded">
-          <strong>Task:</strong> {{ hour.task }}<br>
-          <strong>Hours:</strong> {{ hour.hours }}<br>
-          <strong>Minutes:</strong> {{ hour.minutes }}<br>
-          <strong>Notes:</strong> {{ hour.notes }}<br>
-          <div class="additional-info" *ngIf="hour.expanded"></div>
+            <strong>Task:</strong> {{ hour.task }}<br />
+            <strong>Hours:</strong> {{ hour.hours }}<br />
+            <strong>Minutes:</strong> {{ hour.minutes }}<br />
+            <strong>Notes:</strong> {{ hour.notes }}<br />
+            <div class="additional-info" *ngIf="hour.expanded"></div>
 
-          <!-- Edit Button
+            <!-- Edit Button
            <button (click)="editHour(hour)" class="button is-small is-primary" style="margin-right: 10px;">
             Edit
           </button> -->
 
-          <!-- Delete Button -->
-          <button (click)="deleteHour(hour.id)" class="button is-small is-danger">
-           Delete
-          </button>
-        </div>
-          <hr>
+            <!-- <--Delete Button -->
+            <button
+              (click)="deleteHour(hour.id)"
+              class="button is-small is-danger"
+            >
+              Delete
+            </button>
+          </div>
+          <hr />
         </li>
       </ul>
-      </div>
+    </div>
     <div class="sidebar">
-      <h1 class="title has text primary">
-        Classes / Credits
-      </h1>
+      <h1 class="title has text primary">Classes / Credits</h1>
       <!-- Class / Credit Elements-->
       <div class="task">
         <details>
-          <summary> Elective Classes</summary>
+          <summary>Elective Classes</summary>
           <ul>
-            <li> STEM 1: Intro to Coding (1.0)</li>
-            <li> STEM 2: JavaScript (1.0)</li>
-            <li> STEM 3: Electronics and Coding (1.0)</li>
-            <li> Intro to Java (1.0)</li>
+            <li>STEM 1: Intro to Coding (1.0)</li>
+            <li>STEM 2: JavaScript (1.0)</li>
+            <li>STEM 3: Electronics and Coding (1.0)</li>
+            <li>Intro to Java (1.0)</li>
             <li>AP Computer Science A (1.0)</li>
             <li>AP Computer Science Prin. (1.0)</li>
             <li>Fundamentals of Design (1.0)</li>
@@ -129,7 +199,7 @@
       </div>
       <div class="task">
         <details>
-          <summary> Math </summary>
+          <summary>Math</summary>
           <ul>
             <li>Pre-Algebra (1.0)</li>
             <li>Algebra (1.0)</li>
@@ -169,19 +239,19 @@
       <div class="task">
         <details>
           <summary>English/ Language Arts</summary>
-            <ul>
-              <li>English I (1.0)</li>
-              <li>English II (1.0)</li>
-              <li>American Lit. - English III (1.0)</li>
-              <li>Brititsh Lit. - English IV (1.0)</li>
-              <li>College Prep - English IV (1.0)</li>
-              <li>AP Eng. Literature & Comp. (1.0)</li>
-            </ul>
+          <ul>
+            <li>English I (1.0)</li>
+            <li>English II (1.0)</li>
+            <li>American Lit. - English III (1.0)</li>
+            <li>Brititsh Lit. - English IV (1.0)</li>
+            <li>College Prep - English IV (1.0)</li>
+            <li>AP Eng. Literature & Comp. (1.0)</li>
+          </ul>
         </details>
       </div>
       <div class="task">
         <details>
-          <summary>Science </summary>
+          <summary>Science</summary>
           <ul>
             <li>Physical Science (1.0)</li>
             <li>Intro to Physics & Chemistry (1.0)</li>
@@ -198,7 +268,7 @@
       </div>
       <div class="task">
         <details>
-          <summary> Foreign Language</summary>
+          <summary>Foreign Language</summary>
           <ul>
             <li>Discover Spanish (1.0)</li>
             <li>Discover Portuguese (1.0)</li>
@@ -214,7 +284,7 @@
       </div>
       <div class="task">
         <details>
-          <summary> Fine Arts</summary>
+          <summary>Fine Arts</summary>
           <ul>
             <li>Music Appreciation (1.0)</li>
             <li>AP Music Theory (1.0)</li>
@@ -225,7 +295,7 @@
       </div>
       <div class="task">
         <details>
-          <summary> Heatlth/ P.E. </summary>
+          <summary>Heatlth/ P.E.</summary>
           <ul>
             <li>High School Health (1.0)</li>
             <li>High School Social Development - Level 1 (1.0)</li>
@@ -256,13 +326,12 @@
             <li>College & Career Readiness (1.0)</li>
             <li>Instructional Standards in Edu. (1.0)</li>
           </ul>
-
         </details>
       </div>
-      </div>
-       <!--
+    </div>
+    <!--
       <button class="button is-primary"
       routerLink="/new-list"> + New Course </button>
       Edit Task-->
-    </div>
   </div>
+</div>

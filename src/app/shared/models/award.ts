@@ -1,4 +1,7 @@
 export interface Award {
-  id: number;
-  awardFileUrl?: string;
+description: string;
+title: string;
+id: number;
+images: string[];
+
 }

@@ -1,28 +1,32 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, Router } from '@angular/router';
-import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
-import { UserService } from '../services/user.service';
+import { RouterModule } from '@angular/router';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { AwardService } from '../services/awards.service';
-import { AuthenticationService } from '../services/authentication.service';
+import { Award } from '../shared/models/award';
 
 @Component({
   selector: 'app-awards',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './awards.component.html',
   styleUrl: './awards.component.scss'
 })
-// const uploadForm = document.querySelector('.upload')
 
-export class AwardsComponent{
-
+export class AwardsComponent implements OnInit{
   fileToUpload: File | null = null;
   uploadProgress: number = 0;
+  imageUrl: string | undefined;
+  awards: Award[] = [];
+  title: string = '';
+  description: string = '';
 
-  constructor(private http: HttpClient, private userService: UserService, public authenticationService: AuthenticationService, private router: Router, private awardService: AwardService) {}
+  constructor(private http: HttpClient, private awardService: AwardService) {}
+
+  ngOnInit(): void {
+    this.fetchAwards();
+  }
 
   handleFileInput(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
@@ -35,28 +39,38 @@ export class AwardsComponent{
   }
 
   uploadFile(): void {
-    if (!this.fileToUpload) {
-      console.error('No file selected for upload.');
+    if (!this.title || !this.description || !this.fileToUpload) {
+      console.error('Please provide title, description, and select a file.');
       return;
     }
-
     const formData: FormData = new FormData();
-    formData.append('file', this.fileToUpload, this.fileToUpload.name);
+    formData.append('title', this.title);
+    formData.append('description', this.description);
+    formData.append('images', this.fileToUpload)
 
-    this.http.post<any>('http://homeschool_new_api.com/upload', formData, {
-      reportProgress: true,
-      observe: 'events'
-    }).subscribe(event => {
-      if (event.type === HttpEventType.UploadProgress) {
-        if (event.total !== undefined) {
-          this.uploadProgress = Math.round(100 * event.loaded / event.total);
-        }
-      } else if (event instanceof HttpResponse) {
-        console.log('File upload complete.', event.body);
-        // Handle response after successful upload
+    this.awardService.uploadAward(formData).subscribe(
+      (response) => {
+        console.log('Award created successfully:', response);
+        // Reset form fields after successful upload
+        this.title = '';
+        this.description = '';
+        this.fileToUpload = null;
+      },
+      (error) => {
+        console.error('Failed to create award:', error);
       }
-    }, error => {
-      console.error('File upload failed:', error);
-    });
+    );
+  }
+  fetchAwards(): void {
+  this.awardService.fetchAwardsWithImages().subscribe(
+    (awards: Award[]) => {
+      this.awards = awards;
+    },
+    error => {
+      console.error('Failed to fetch award:', error);
+    }
+  );
   }
 }
+
+

@@ -2,19 +2,27 @@
   <h2> Awards or Certificates Upload</h2>
     <p> Upload a photo of any awards or certificates your child receives to keep for your records. This will allow you to stay organized and keep all homeschool documents in one location. </p>
 <br>
-  <div class="info">
-    Click on the "Choose File" button to upload a image or file:
+<div class="info">
+  <form (ngSubmit)="uploadFile()">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" [(ngModel)]="title" required><br><br>
 
-    <input type="file" (change)="handleFileInput($event)" >
-    <button (click)="uploadFile()">Upload</button>
-<!-- <form id="upload"
-      action="/action_page.php"
-      method="post"
-      enctype="multipart/form-data">
-  <label for="myFile">Choose File:</label>
-  <input type="file" id="myFile" name="myfile" accept="image/*"/>
-  <br/><br/>
-  <input type="submit" value="Submit">
-</form> -->
-</div>
-</div>
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" [(ngModel)]="description" required></textarea><br><br>
+
+    <label for="fileInput">Choose File:</label>
+    <input type="file" id="fileInput" (change)="handleFileInput($event)" required><br><br>
+
+    <button type="submit" [disabled]="!title || !description || !fileToUpload">Upload</button>
+  </form>
+
+  <div class="all-images">
+    <h2>Previously Uploaded Awards:</h2>
+    <div *ngFor="let award of awards">
+      <h2>{{ award.title }}</h2>
+      <p>{{ award.description }}</p>
+      <div *ngFor="let imageUrl of award.images">
+        <img [src]="imageUrl" alt="Award Image">
+      </div>
+    </div>
+  </div>
