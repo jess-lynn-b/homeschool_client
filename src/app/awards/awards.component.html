@@ -21,8 +21,10 @@
     <div *ngFor="let award of awards">
       <h2>{{ award.title }}</h2>
       <p>{{ award.description }}</p>
-      <div *ngFor="let imageUrl of award.images">
-        <img [src]="imageUrl" alt="Award Image">
+      <!-- <div *ngFor="let imageUrl of award.images"> -->
+        <img [src]="award.image_url"
+        alt="Award Image"
+        (error)="handleImageError($event)">
       </div>
     </div>
   </div>

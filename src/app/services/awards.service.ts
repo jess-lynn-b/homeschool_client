@@ -16,12 +16,9 @@ export class AwardService {
 
   fetchAwardsWithImages(): Observable<Award[]> {
     return this.http.get<Award[]>(`${environment.apiUrl}/awards`)
-    //.pipe(
-    //   catchError((error: any) => {
-    //     console.error('Error fetching award:', error);
-    //     return throwError('Something went wrong with getting previous awards.');
-    //   })
-    // );
+  }
+  getAwardById(id: number): Observable<Award> {
+    return this.http.get<Award>(`${environment.apiUrl}/awards`);
   }
 
   uploadAward(formData: FormData): Observable<any> {

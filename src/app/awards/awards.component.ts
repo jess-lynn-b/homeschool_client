@@ -18,24 +18,34 @@ export class AwardsComponent implements OnInit{
   fileToUpload: File | null = null;
   uploadProgress: number = 0;
   imageUrl: string | undefined;
-  awards: Award[] = [];
+  awards: any[] = [];
   title: string = '';
   description: string = '';
+  image: any;
 
   constructor(private http: HttpClient, private awardService: AwardService) {}
 
   ngOnInit(): void {
-    this.fetchAwards();
+     this.fetchAwards();
   }
-
-  handleFileInput(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-
-    if (inputElement.files && inputElement.files.length > 0) {
-      this.fileToUpload = inputElement.files.item(0);
-    } else {
-      this.fileToUpload = null;
+  fetchAwards(): void {
+    this.awardService.fetchAwardsWithImages().subscribe(
+      (awards: any[]) => {
+        this.awards = awards;
+        console.log(this.awards)
+      },
+      error => {
+        console.error('Failed to fetch awards:', error);
+      }
+    );
     }
+    handleImageError(event: any){
+      console.error('Error loading image:', event);
+
+    }
+
+  handleFileInput(event: any): void {
+    this.fileToUpload = event.target.files[0];
   }
 
   uploadFile(): void {
@@ -60,16 +70,6 @@ export class AwardsComponent implements OnInit{
         console.error('Failed to create award:', error);
       }
     );
-  }
-  fetchAwards(): void {
-  this.awardService.fetchAwardsWithImages().subscribe(
-    (awards: Award[]) => {
-      this.awards = awards;
-    },
-    error => {
-      console.error('Failed to fetch award:', error);
-    }
-  );
   }
 }
 
