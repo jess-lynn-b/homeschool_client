@@ -2,9 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { AwardService } from '../services/awards.service';
-import { Award } from '../shared/models/award';
 
 @Component({
   selector: 'app-awards',
@@ -56,7 +55,7 @@ export class AwardsComponent implements OnInit{
     const formData: FormData = new FormData();
     formData.append('title', this.title);
     formData.append('description', this.description);
-    formData.append('images', this.fileToUpload)
+    formData.append('images', this.fileToUpload);
 
     this.awardService.uploadAward(formData).subscribe(
       (response) => {
@@ -68,6 +67,19 @@ export class AwardsComponent implements OnInit{
       },
       (error) => {
         console.error('Failed to create award:', error);
+      }
+    );
+  }
+
+  deleteAward(awardId: number): void {
+    this.awardService.deleteAward(awardId).subscribe(
+      () => {
+        console.log('Award deleted successfully');
+        // Optionally, refresh the awards list after deletion
+        // this.fetchAwards();
+      },
+      (error) => {
+        console.error('Failed to delete award:', error);
       }
     );
   }

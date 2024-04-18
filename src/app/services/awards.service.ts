@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { environment } from "../../environments/environment";
 import { Award } from "../shared/models/award";
 
@@ -23,6 +23,10 @@ export class AwardService {
 
   uploadAward(formData: FormData): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/awards`, formData);
+  }
+
+  deleteAward(awardId: number): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/awards/${awardId}`);
   }
 
 }
